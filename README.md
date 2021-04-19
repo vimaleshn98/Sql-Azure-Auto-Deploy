@@ -24,19 +24,20 @@
       -Location $location `
       -SqlAdministratorCredentials $(New-Object -TypeName System.Management.Automation.PSCredential `
       -ArgumentList $adminLogin, $(ConvertTo-SecureString -String $password -AsPlainText -Force))
-     this cmdlets used for creating the sql-server with name,location ,and credential(creating new pscredential object with parameter username and password)
+ this cmdlets used for creating the sql-server with name,location ,and credential(creating new pscredential object with parameter username and password)
 
 Setting up the Firewall rule for sql Server:
   
-  New-AzSqlServerFirewallRule -ResourceGroupName $resourceGroupName `
+    New-AzSqlServerFirewallRule -ResourceGroupName $resourceGroupName `
       -ServerName $serverName `
-      -FirewallRuleName "AllowedIPs" -StartIpAddress $startIp -EndIpAddress $endIp
-   This cmdlets used for crate firewall rule with "allowed ip" within range specified.  
-   So now we are created the Sql-server with firewall enabled.
+       -FirewallRuleName "AllowedIPs" -StartIpAddress $startIp -EndIpAddress $endIp
+ 
+ This cmdlets used for crate firewall rule with "allowed ip" within range specified.  
+ So now we are created the Sql-server with firewall enabled.
 
 create Database now:
  
- New-AzSqlDatabase  -ResourceGroupName $resourceGroupName `
+    New-AzSqlDatabase  -ResourceGroupName $resourceGroupName `
       -ServerName $serverName `
       -DatabaseName $databaseName `
       -Edition GeneralPurpose `
