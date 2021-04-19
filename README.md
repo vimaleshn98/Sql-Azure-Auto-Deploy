@@ -50,7 +50,53 @@ create Database now:
       -SampleName "AdventureWorksLT"
       
  
-   
- 
+**Using ARM Templates**
+  One more approach for deploying  Resource on the azure is using ARM template.
+  If you need a way of deploying infrastructure-as-code to Azure, then Azure Resource Manager (ARM) Templates are the obvious way of doing it.They define the objects you want,   their types, names and properties in a JSON file which can be understood by the ARM API. Azure is managed using an API: Originally it was managed using the Azure Service       management API or ASM which control deployments of what is termed “Classic”. This was replaced by the Azure Resource Manager or ARM API. 
+  An ARM template can either contain the contents of an entire resource group or it can contain one or more resources from a resource group. 
+  
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#"
+  "contentVersion": "1.0.0.0",
+  used to specify the which schema is used for  resource templates. Versioning of the Arm template.
+  
+  Then comes the Parameters where can given some parameter values so the value can be passed during the execution of templates. 
+  
+  Then we can specify the value of variables. that we are going use on the template.
+  
+  then we can specify the resources which we want to deploy on azure.
+      
+  
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "2020-02-02-preview",
+      "name": "[parameters('serverName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "administratorLogin": "[parameters('administratorLogin')]",
+        "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
+      },
+      "resources": [
+        {
+          "type": "databases",
+          "apiVersion": "2020-08-01-preview",
+          "name": "[parameters('sqlDBName')]",
+          "location": "[parameters('location')]",
+          "sku": {
+            "name": "Standard",
+            "tier": "Standard"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', concat(parameters('serverName')))]"
+          ]
+        }
+        
+  here we r specifying the types of resource and apiversion and properties of resources.
+        
+  At end we can use  output module for getting return value from the azure deplyments.
+        
+        
+        
+  Now we can deploy template using azure cli or powershell .
    
   
