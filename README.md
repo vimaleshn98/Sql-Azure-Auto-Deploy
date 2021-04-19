@@ -66,7 +66,8 @@ create Database now:
   then we can specify the resources which we want to deploy on azure.
       
   
-  "resources": [
+    "resources": [
+  
     {
       "type": "Microsoft.Sql/servers",
       "apiVersion": "2020-02-02-preview",
