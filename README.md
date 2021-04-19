@@ -1,4 +1,6 @@
 # Sql-Azure-Auto-Deploy
+
+**Using Poweshell Script:**
   Azure PowerShell is a set of cmdlets for managing Azure resources directly from the PowerShell command line.
   Azure CLI, PowerShell, ARM Template, or the portal.
 
